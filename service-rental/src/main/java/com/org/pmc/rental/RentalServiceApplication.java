@@ -1,4 +1,4 @@
-package com.org.pmc.rental.service;
+package com.org.pmc.rental;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

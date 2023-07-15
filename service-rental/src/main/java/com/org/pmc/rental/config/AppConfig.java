@@ -1,4 +1,4 @@
-package com.org.pmc.rental.service.config;
+package com.org.pmc.rental.config;
 
 import com.pmc.rental.contract.config.OpenApiConfiguration;
 import org.springframework.context.annotation.Configuration;

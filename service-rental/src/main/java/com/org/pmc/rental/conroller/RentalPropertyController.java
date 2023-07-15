@@ -1,4 +1,4 @@
-package com.org.pmc.rental.service.conroller;
+package com.org.pmc.rental.conroller;
 
 import com.pmc.rental.contract.endpoint.RentalRegisterPropertyApi;
 import com.pmc.rental.contract.model.Property;
