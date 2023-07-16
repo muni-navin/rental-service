@@ -12,9 +12,19 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private static final String SUCCESS = "Success";
 
-    public User saveUser(User user) {
+    public User saveOrUpdateUser(User user) {
         var userEntity = userRepository.save(userMapper.toEntity(user));
         return userMapper.toVo(userEntity);
+    }
+
+    public User fetchUser(Long userId) {
+        return userMapper.toVo(userRepository.findById(userId).get());
+    }
+
+    public String deleteUser(Long userId) {
+        userRepository.deleteById(userId);
+        return SUCCESS;
     }
 }

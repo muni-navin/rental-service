@@ -1,7 +1,5 @@
 package com.org.pmc.rental.conroller;
 
-import com.org.pmc.rental.entity.UserEntity;
-import com.org.pmc.rental.repository.UserRepository;
 import com.org.pmc.rental.service.UserService;
 import com.pmc.rental.contract.endpoint.RentalRegisterUserApi;
 import com.pmc.rental.contract.model.User;
@@ -25,22 +23,25 @@ public class RentalUserController implements RentalRegisterUserApi {
 
     @Override
     public ResponseEntity<User> register(@RequestBody @Valid User user) {
-        user = userService.saveUser(user);
+        user = userService.saveOrUpdateUser(user);
         return ResponseEntity.created(URI.create("user")).body(user);
     }
 
     @Override
-    public ResponseEntity<User> update(User user) {
-        return null;
+    public ResponseEntity<User> update(@RequestBody @Valid User user) {
+        user = userService.saveOrUpdateUser(user);
+        return ResponseEntity.created(URI.create("user")).body(user);
     }
 
     @Override
-    public ResponseEntity<User> fetch(String s) {
-        return null;
+    public ResponseEntity<User> fetch(Long userId) {
+        var user = userService.fetchUser(userId);
+        return ResponseEntity.created(URI.create("user")).body(user);
     }
 
     @Override
-    public ResponseEntity<User> delete(User user) {
-        return null;
+    public ResponseEntity<String> delete(Long userId) {
+        var status = userService.deleteUser(userId);
+        return ResponseEntity.created(URI.create("status")).body(status);
     }
 }
