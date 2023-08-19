@@ -1,10 +1,13 @@
 package com.org.pmc.rental.service;
 
+import com.org.pmc.rental.entity.UserEntity;
 import com.org.pmc.rental.mapper.UserMapper;
 import com.org.pmc.rental.repository.UserRepository;
 import com.pmc.rental.contract.model.User;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -26,5 +29,10 @@ public class UserService {
     public String deleteUser(Long userId) {
         userRepository.deleteById(userId);
         return SUCCESS;
+    }
+
+    public boolean validateUserCredentials(String username, String password) {
+        Optional<UserEntity> userOptional = userRepository.findByUserNameAndPassword(username, password);
+        return userOptional.isPresent();
     }
 }

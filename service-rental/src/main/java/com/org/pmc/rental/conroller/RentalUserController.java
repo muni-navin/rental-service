@@ -2,6 +2,7 @@ package com.org.pmc.rental.conroller;
 
 import com.org.pmc.rental.service.UserService;
 import com.pmc.rental.contract.endpoint.RentalRegisterUserApi;
+import com.pmc.rental.contract.model.LoginRequest;
 import com.pmc.rental.contract.model.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +25,7 @@ public class RentalUserController implements RentalRegisterUserApi {
     @Override
     public ResponseEntity<User> register(@RequestBody @Valid User user) {
         user = userService.saveOrUpdateUser(user);
+        log.info("User Registered: " + user.getEmail());
         return ResponseEntity.created(URI.create("user")).body(user);
     }
 
@@ -43,5 +45,10 @@ public class RentalUserController implements RentalRegisterUserApi {
     public ResponseEntity<String> delete(Long userId) {
         var status = userService.deleteUser(userId);
         return ResponseEntity.created(URI.create("status")).body(status);
+    }
+
+    @Override
+    public ResponseEntity<Boolean> validate(@RequestBody @Valid LoginRequest loginRequest) {
+        return ResponseEntity.created(URI.create("flag")).body(userService.validateUserCredentials(loginRequest.getUsername(), loginRequest.getPassword()));
     }
 }
