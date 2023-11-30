@@ -40,3 +40,9 @@ spring.jpa.show-sql=true
 spring.datasource.platform=mysql
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
+
+#Docker commands
+docker -v
+running: docker run -p 9090:8080 service-rental.jar
+Stopping : docker stop --time=30 ddfdb30ff369
+IP Address : docker inspect --format="{{.NetworkSettings.IPAddress}}" ddfdb30ff369
